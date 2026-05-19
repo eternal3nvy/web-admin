@@ -5,6 +5,7 @@ import MainLayout from './layouts/MainLayout'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Users from './pages/Users'
+import LotsPage from './pages/LotsPage'
 
 
 function App() {
@@ -25,6 +26,14 @@ function App() {
           <ProtectedRoute adminOnly={true} >
             <MainLayout>
               <Users />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+
+        <Route path="/lots" element = {
+          <ProtectedRoute>
+            <MainLayout>
+              <LotsPage/>
             </MainLayout>
           </ProtectedRoute>
         } />

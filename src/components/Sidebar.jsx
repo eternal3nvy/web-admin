@@ -31,6 +31,15 @@ const Sidebar = () => {
             </Link>
           </li>
 
+          <li className='nav-item'>
+            <Link
+            to="/lots"
+            className={`nav-link ${isActive('/lots') ? 'active' : ''}`}
+            >
+              Lots
+            </Link>
+          </li>
+
           {role === 'admin' && (
             <li className="nav-item">
               <Link

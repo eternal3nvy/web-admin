@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './auth/ProtectedRoute'
 import MainLayout from './layouts/MainLayout'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Users from './pages/Users'
-import LotsPage from './pages/LotsPage'
+import CreateModeratorPage from './pages/CreateModeratorPage'
 import LotPage from './pages/lotPage'
 
 
@@ -27,6 +26,14 @@ function App() {
           <ProtectedRoute adminOnly={true} >
             <MainLayout>
               <Users />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+
+        <Route path="/moderators/create" element={
+          <ProtectedRoute adminOnly={true}>
+            <MainLayout>
+              <CreateModeratorPage />
             </MainLayout>
           </ProtectedRoute>
         } />

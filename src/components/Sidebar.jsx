@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
+import BrandInfinityIcon from './BrandInfinityIcon';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -12,9 +13,9 @@ const Sidebar = () => {
     <aside className="sidebar">
       <div className="sidebar-brand">
         <div className="d-flex align-items-center gap-2 mb-3">
-          <i className="bi bi-gem" style={{ fontSize: '28px', color: '#6366f1' }}></i>
+          <BrandInfinityIcon size={32} variant="sidebar" />
           <div>
-            <h5 className="mb-0">Antiques</h5>
+            <h5 className="mb-0">Antiques Auction</h5>
             <small className="text-muted">Admin Panel</small>
           </div>
         </div>
@@ -41,14 +42,25 @@ const Sidebar = () => {
           </li>
 
           {role === 'admin' && (
-            <li className="nav-item">
-              <Link
-                to="/users"
-                className={`nav-link ${isActive('/users') ? 'active' : ''}`}
-              >
-                Users
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link
+                  to="/users"
+                  className={`nav-link ${isActive('/users') ? 'active' : ''}`}
+                >
+                  Users
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/moderators/create"
+                  className={`nav-link ${isActive('/moderators/create') ? 'active' : ''}`}
+                >
+                  <i className="bi bi-person-plus me-2" />
+                  Новий модератор
+                </Link>
+              </li>
+            </>
           )}
         </ul>
       </nav>

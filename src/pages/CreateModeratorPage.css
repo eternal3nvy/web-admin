@@ -1,0 +1,39 @@
+.create-moderator-page h1 {
+  margin-bottom: 8px;
+  font-size: 28px;
+  color: #222;
+}
+
+.create-moderator-page .page-subtitle {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.moderator-form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 640px;
+}
+
+.moderator-form-card .form-label {
+  font-weight: 500;
+  color: #444;
+}
+
+.moderator-form-card .btn-submit {
+  background-color: #6366f1;
+  border-color: #6366f1;
+  padding: 10px 24px;
+  font-weight: 500;
+}
+
+.moderator-form-card .btn-submit:hover {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.moderator-form-card .btn-submit:disabled {
+  opacity: 0.7;
+}

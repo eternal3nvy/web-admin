@@ -4,6 +4,7 @@ import MainLayout from './layouts/MainLayout'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Users from './pages/Users'
+import LotsPage from './pages/lotsPage'
 import CreateModeratorPage from './pages/CreateModeratorPage'
 import LotPage from './pages/lotPage'
 

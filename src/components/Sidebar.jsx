@@ -41,26 +41,25 @@ const Sidebar = () => {
             </Link>
           </li>
 
+          <li className="nav-item">
+            <Link
+              to="/users"
+              className={`nav-link ${isActive('/users') ? 'active' : ''}`}
+            >
+              Users
+            </Link>
+          </li>
+
           {role === 'admin' && (
-            <>
-              <li className="nav-item">
-                <Link
-                  to="/users"
-                  className={`nav-link ${isActive('/users') ? 'active' : ''}`}
-                >
-                  Users
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/moderators/create"
-                  className={`nav-link ${isActive('/moderators/create') ? 'active' : ''}`}
-                >
-                  <i className="bi bi-person-plus me-2" />
-                  Новий модератор
-                </Link>
-              </li>
-            </>
+            <li className="nav-item">
+              <Link
+                to="/moderators/create"
+                className={`nav-link ${isActive('/moderators/create') ? 'active' : ''}`}
+              >
+                <i className="bi bi-person-plus me-2" />
+                Новий модератор
+              </Link>
+            </li>
           )}
         </ul>
       </nav>

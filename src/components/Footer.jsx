@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container-fluid">
         <div className="row align-items-center">
             <p className="text-muted mb-0" style={{textAlign: "center"}}>
-              {currentYear} Antiques Auction. All rights reserved.
+              {currentYear} Antiques Auction Dashboard. All rights reserved.
             </p>
 
         </div>

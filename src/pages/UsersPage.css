@@ -1,0 +1,221 @@
+@import './LotsPage.css';
+
+.users-page-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+}
+
+.users-tab {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.users-tab:hover {
+  color: #333;
+}
+
+.users-tab.active {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+}
+
+.lots-table .actions-cell {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.lots-table .actions-cell .btn {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.btn-edit {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-edit:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+.btn-ban {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-ban:hover:not(:disabled) {
+  background-color: #d68910;
+}
+
+.btn-unban {
+  background-color: #16a085;
+  color: white;
+}
+
+.btn-unban:hover:not(:disabled) {
+  background-color: #138d75;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 20px;
+}
+
+.modal-content .form-group {
+  margin-bottom: 14px;
+}
+
+.modal-content label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.modal-content input:disabled {
+  background: #f5f5f5;
+  color: #777;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  background-color: #95a5a6;
+  color: white;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background-color: #7f8c8d;
+}
+
+.alert-inline {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.alert-inline.error {
+  background: #fdecea;
+  color: #c0392b;
+}
+
+.alert-inline.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.modal-content .form-select-status {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.table-inline-select {
+  min-width: 140px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+}
+
+.table-inline-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.table-inline-select.status-active {
+  border-color: #27ae60;
+  color: #1e8449;
+}
+
+.table-inline-select.status-on_review {
+  border-color: #f39c12;
+  color: #b7791f;
+}
+
+.table-inline-select.status-banned {
+  border-color: #e74c3c;
+  color: #c0392b;
+}
+
+.table-inline-select.status-suspended {
+  border-color: #9b59b6;
+  color: #7d3c98;
+}
+
+.table-inline-select.status-deleted {
+  border-color: #95a5a6;
+  color: #7f8c8d;
+}
+
+.table-inline-select.role-admin {
+  border-color: #6366f1;
+  color: #4f46e5;
+}
+
+.table-inline-select.role-mod {
+  border-color: #3498db;
+  color: #2980b9;
+}

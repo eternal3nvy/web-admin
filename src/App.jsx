@@ -23,8 +23,8 @@ function App() {
           </ProtectedRoute>
         } />
 
-        <Route path="/users" element ={
-          <ProtectedRoute adminOnly={true} >
+        <Route path="/users" element={
+          <ProtectedRoute>
             <MainLayout>
               <Users />
             </MainLayout>

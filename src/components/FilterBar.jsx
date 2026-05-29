@@ -14,11 +14,14 @@ export default function FilterBar() {
     search: searchParams.get('title[like]') || '',
     category_id: searchParams.get('category_id') || '',
     subcategory_id: searchParams.get('subcategory_id') || '',
-    lot_status: searchParams.get('lot_status') || 'in-moderation',
+    lot_status: searchParams.get('lot_status') || '',
     minPrice: searchParams.get('starting_price[gte]') || '',
     maxPrice: searchParams.get('starting_price[lte]') || '',
     startDate: searchParams.get('start_date[gte]') || '',
-    endDate: searchParams.get('end_date[lte]') || ''
+    endDate: searchParams.get('end_date[lte]') || '',
+    sort: searchParams.get('sort') || '',
+    page: parseInt(searchParams.get('page')) || 1,
+    limit: parseInt(searchParams.get('limit')) || 20
   });
 
   useEffect(() => {
@@ -88,7 +91,8 @@ export default function FilterBar() {
       minPrice: 'starting_price[gte]',
       maxPrice: 'starting_price[lte]',
       startDate: 'start_date[gte]',
-      endDate: 'end_date[lte]'
+      endDate: 'end_date[lte]',
+      sort: 'sort'
     };
 
     Object.entries(filterMapping).forEach(([localKey, urlKey]) => {
@@ -96,6 +100,15 @@ export default function FilterBar() {
         newParams.set(urlKey, localFilters[localKey]);
       }
     });
+
+    // Preserve lot_status from current URL if not explicitly changed
+    if (!newParams.has('lot_status') && searchParams.get('lot_status')) {
+      newParams.set('lot_status', searchParams.get('lot_status'));
+    }
+
+    // Reset to page 1 when filters change
+    newParams.set('page', '1');
+    newParams.set('limit', localFilters.limit || '20');
 
     setSearchParams(newParams);
   };
@@ -109,9 +122,15 @@ export default function FilterBar() {
       minPrice: '',
       maxPrice: '',
       startDate: '',
-      endDate: ''
+      endDate: '',
+      sort: '',
+      page: 1,
+      limit: 20
     });
-    setSearchParams(new URLSearchParams());
+    const newParams = new URLSearchParams();
+    newParams.set('page', '1');
+    newParams.set('limit', '20');
+    setSearchParams(newParams);
   };
 
   return (
@@ -152,8 +171,8 @@ export default function FilterBar() {
         >
           <option value="">All subcategories</option>
           {subcategories.map((subcat, idx) => (
-            <option key={subcat.lot_subcategory_id || idx} value={subcat.lot_subcategory_id}>
-              {subcat.subcategory_name}
+            <option key={subcat.id || idx} value={subcat.id}>
+              {subcat.name}
             </option>
           ))}
         </select>
@@ -212,6 +231,36 @@ export default function FilterBar() {
           value={localFilters.endDate}
           onChange={(e) => handleChange('endDate', e.target.value)}
         />
+      </div>
+
+      <div className="filter-group">
+        <label>Sort by:</label>
+        <select 
+          value={localFilters.sort}
+          onChange={(e) => handleChange('sort', e.target.value)}
+        >
+          <option value="">Default</option>
+          <option value="creation_date">Creation Date (Oldest)</option>
+          <option value="-creation_date">Creation Date (Newest)</option>
+          <option value="title">Title (A-Z)</option>
+          <option value="-title">Title (Z-A)</option>
+          <option value="starting_price">Price (Low-High)</option>
+          <option value="-starting_price">Price (High-Low)</option>
+          <option value="lot_status">Status (A-Z)</option>
+        </select>
+      </div>
+
+      <div className="filter-group">
+        <label>Items per page:</label>
+        <select 
+          value={localFilters.limit}
+          onChange={(e) => handleChange('limit', parseInt(e.target.value))}
+        >
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
       </div>
 
       <button type="submit" className="btn btn-primary">Apply</button>

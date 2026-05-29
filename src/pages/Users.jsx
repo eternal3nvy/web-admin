@@ -23,10 +23,20 @@ const formatName = (row) => {
 const Users = () => {
   const { role } = useAuth();
   const isAdmin = role === 'admin';
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
   const [activeTab, setActiveTab] = useState('users');
   const [items, setItems] = useState([]);
+  
+  const [paginationInfo, setPaginationInfo] = useState({
+    current_page: 1,
+    per_page: 20,
+    total: 0,
+    max_page: 1,
+    has_prev: false,
+    has_next: false,
+  });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [actionError, setActionError] = useState(null);
@@ -36,16 +46,32 @@ const Users = () => {
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
 
+  const currentPage = parseInt(searchParams.get('page')) || 1;
+
   const fetchItems = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const params = Object.fromEntries(searchParams.entries());
-      const data =
+      const responseData =
         activeTab === 'users'
           ? await getAllUsers(params)
           : await getAllModerators(params);
-      setItems(Array.isArray(data) ? data : []);
+
+      if (responseData && responseData.data && responseData.pagination) {
+        setItems(responseData.data);
+        setPaginationInfo(responseData.pagination);
+      } else {
+        setItems(Array.isArray(responseData) ? responseData : []);
+        setPaginationInfo({
+          current_page: 1,
+          per_page: responseData.length || 20,
+          total: responseData.length || 0,
+          max_page: 1,
+          has_prev: false,
+          has_next: false,
+        });
+      }
     } catch (err) {
       console.error('Failed to fetch:', err);
       setError(
@@ -288,37 +314,131 @@ const Users = () => {
       ) : items.length === 0 ? (
         <p>Записів не знайдено</p>
       ) : (
-        <table className="lots-table">
-          <thead>
-            {activeTab === 'users' ? (
-              <tr>
-                <th>ID</th>
-                <th>Ім'я</th>
-                <th>Email</th>
-                <th>Телефон</th>
-                <th>Баланс</th>
-                <th>Рейтинг</th>
-                <th>Статус</th>
-                <th>Реєстрація</th>
-                <th>Дії</th>
-              </tr>
-            ) : (
-              <tr>
-                <th>ID</th>
-                <th>Ім'я</th>
-                <th>Email</th>
-                <th>Телефон</th>
-                <th>Роль</th>
-                <th>Дії</th>
-              </tr>
-            )}
-          </thead>
-          <tbody>
-            {activeTab === 'users' ? renderUserRows() : renderModeratorRows()}
-          </tbody>
-        </table>
-      )}
+        <>
+          <table className="lots-table">
+            <thead>
+              {activeTab === 'users' ? (
+                <tr>
+                  <th>ID</th>
+                  <th>Ім'я</th>
+                  <th>Email</th>
+                  <th>Телефон</th>
+                  <th>Баланс</th>
+                  <th>Рейтинг</th>
+                  <th>Статус</th>
+                  <th>Реєстрація</th>
+                  <th>Дії</th>
+                </tr>
+              ) : (
+                <tr>
+                  <th>ID</th>
+                  <th>Ім'я</th>
+                  <th>Email</th>
+                  <th>Телефон</th>
+                  <th>Роль</th>
+                  <th>Дії</th>
+                </tr>
+              )}
+            </thead>
+            <tbody>
+              {activeTab === 'users' ? renderUserRows() : renderModeratorRows()}
+            </tbody>
+          </table>
 
+          {/* Пагинация в стиле LotsPage */}
+          {items.length > 0 && paginationInfo.max_page > 1 && (
+            <div style={{ marginTop: '20px', display: 'flex', gap: '10px', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => {
+                  const params = new URLSearchParams(searchParams);
+                  params.set('page', Math.max(1, currentPage - 1).toString());
+                  setSearchParams(params);
+                  window.scrollTo(0, 0);
+                }}
+                disabled={!paginationInfo.has_prev}
+                style={{
+                  padding: '4px 8px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  cursor: !paginationInfo.has_prev ? 'not-allowed' : 'pointer',
+                  opacity: !paginationInfo.has_prev ? 0.5 : 1,
+                  backgroundColor: '#fff',
+                  fontWeight: 'bold',
+                  fontSize: '12px'
+                }}
+              >
+                ← Prev
+              </button>
+
+              <div style={{ display: 'flex', gap: '3px', alignItems: 'center', flexWrap: 'wrap' }}>
+                {Array.from({ length: Math.min(paginationInfo.max_page, 5) }, (_, i) => {
+                  let pageNum;
+                  if (paginationInfo.max_page <= 5) {
+                    pageNum = i + 1;
+                  } else if (currentPage <= 3) {
+                    pageNum = i + 1;
+                  } else if (currentPage >= paginationInfo.max_page - 2) {
+                    pageNum = paginationInfo.max_page - 4 + i;
+                  } else {
+                    pageNum = currentPage - 2 + i;
+                  }
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => {
+                        const params = new URLSearchParams(searchParams);
+                        params.set('page', pageNum.toString());
+                        setSearchParams(params);
+                        window.scrollTo(0, 0);
+                      }}
+                      style={{
+                        padding: '4px 6px',
+                        border: '1px solid #ddd',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        backgroundColor: currentPage === pageNum ? '#8884d8' : '#fff',
+                        color: currentPage === pageNum ? '#fff' : '#000',
+                        fontWeight: currentPage === pageNum ? 'bold' : 'normal',
+                        fontSize: '12px',
+                        minWidth: '28px'
+                      }}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => {
+                  const params = new URLSearchParams(searchParams);
+                  params.set('page', Math.min(paginationInfo.max_page, currentPage + 1).toString());
+                  setSearchParams(params);
+                  window.scrollTo(0, 0);
+                }}
+                disabled={!paginationInfo.has_next}
+                style={{
+                  padding: '4px 8px',
+                  border: '1px solid #ddd',
+                  borderRadius: '4px',
+                  cursor: !paginationInfo.has_next ? 'not-allowed' : 'pointer',
+                  opacity: !paginationInfo.has_next ? 0.5 : 1,
+                  backgroundColor: '#fff',
+                  fontWeight: 'bold',
+                  fontSize: '12px'
+                }}
+              >
+                Next →
+              </button>
+
+              <span style={{ marginLeft: '10px', fontSize: '12px', fontWeight: '500' }}>
+                Page {paginationInfo.current_page} of {paginationInfo.max_page}
+              </span>
+            </div>
+          )}
+        </>
+      )}
+      
       {editModal && (
         <div className="modal-overlay" onClick={closeEdit}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

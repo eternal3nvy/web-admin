@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
-import BrandInfinityIcon from './BrandInfinityIcon';
+import BrandLogo from './BrandLogo';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -13,7 +13,7 @@ const Sidebar = () => {
     <aside className="sidebar">
       <div className="sidebar-brand">
         <div className="d-flex align-items-center gap-2 mb-3">
-          <BrandInfinityIcon size={32} variant="sidebar" />
+          <BrandLogo size={32} className="sidebar-brand-logo" />
           <div>
             <h5 className="mb-0">Antiques Auction</h5>
             <small className="text-muted">Admin Panel</small>
@@ -25,8 +25,8 @@ const Sidebar = () => {
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link
-              to="/"
-              className={`nav-link ${isActive('/') ? 'active' : ''}`}
+              to="/dashboard"
+              className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}
             >
               Dashboard
             </Link>

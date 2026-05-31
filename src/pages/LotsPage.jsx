@@ -200,8 +200,8 @@ function LotsPage() {
                     border: '1px solid #ddd',
                     borderRadius: '4px',
                     cursor: 'pointer',
-                    backgroundColor: currentPage === pageNum ? '#8884d8' : '#fff',
-                    color: currentPage === pageNum ? '#fff' : '#000',
+                    backgroundColor: currentPage === pageNum ? '#408196' : '#fff',
+                    color: currentPage === pageNum ? '#f6f8f9' : '#000',
                     fontWeight: currentPage === pageNum ? 'bold' : 'normal',
                     fontSize: '12px',
                     minWidth: '28px'

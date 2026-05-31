@@ -1,0 +1,8 @@
+:root {
+  --color-accent: #408196;
+  --color-accent-hover: #357080;
+  --color-accent-light: #d1e8ea;
+  --color-text-on-accent: #f6f8f9;
+  --color-accent-ring: rgba(64, 129, 150, 0.1);
+  --color-accent-shadow: rgba(64, 129, 150, 0.3);
+}

@@ -1,0 +1,6 @@
+.brand-logo {
+  display: block;
+  flex-shrink: 0;
+  width: auto;
+  object-fit: contain;
+}

@@ -76,8 +76,8 @@ const LotsByPeriodChart = () => {
             style={{
               padding: "6px 12px",
               cursor: loading ? "not-allowed" : "pointer",
-              background: loading ? "#ccc" : "#8884d8",
-              color: "#fff",
+              background: loading ? "#ccc" : "#408196",
+              color: "#f6f8f9",
               border: "none",
               borderRadius: "4px"
             }}
@@ -102,7 +102,7 @@ const LotsByPeriodChart = () => {
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="lotsCount" name="Created Lots" stroke="#8884d8" activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="lotsCount" name="Created Lots" stroke="#408196" activeDot={{ r: 8 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

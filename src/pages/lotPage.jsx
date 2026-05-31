@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getLotById, approveLot, rejectLot } from '../services/lotService';
 import './lotPage.css';
+import LotGrowthChart from '../components/statComponents/lotGrowthChart';
 
 function LotPage() {
   const { id } = useParams();
@@ -161,8 +162,9 @@ function LotPage() {
           ) : (
             <div className="no-image">No image available</div>
           )}
+        <LotGrowthChart lotId={lot.lot_id} />
         </div>
-
+        
         <div className="lot-details">
           <div className="detail-row">
             <span className="label">ID:</span>

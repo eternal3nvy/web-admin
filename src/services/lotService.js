@@ -29,3 +29,8 @@ export const rejectLot = async (id, reason = '') => {
     const res = await api.post(`/lots/${id}/reject`, { reason });
     return res.data;
 };
+
+export const getLotGrowthChart = async (lotId) => {
+    const res = await api.get(`/lots/${lotId}/growth-chart`);
+    return res.data;
+};

@@ -43,8 +43,11 @@
 
 .lot-images {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center;
+  gap: 30px;
+  width: 100%;
 }
 
 .lot-main-image {

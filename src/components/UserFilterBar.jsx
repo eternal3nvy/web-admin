@@ -66,6 +66,13 @@ export default function UserFilterBar({ tab }) {
     setSearchParams(newParams);
   };
 
+  const hasActiveFilters =
+    searchParams.get('search') ||
+    searchParams.get('status') ||
+    searchParams.get('is_admin') ||
+    (searchParams.get('sort') && searchParams.get('sort') !== '-creation_date') ||
+    (searchParams.get('limit') && searchParams.get('limit') !== '20');
+
   const statusOptions =
     tab === 'users'
       ? [
@@ -134,12 +141,12 @@ export default function UserFilterBar({ tab }) {
         </select>
       </div>
 
-      <div className="filter-actions" style={{ display: 'flex', gap: '10px', alignItems: 'flex-end', marginTop: 'auto' }}>
+      <div className="filter-actions">
         <button type="submit" className="btn btn-primary">
           Застосувати
         </button>
 
-        {(searchParams.get('search') || searchParams.get('status') || searchParams.get('is_admin') || searchParams.get('sort') || (searchParams.get('limit') && searchParams.get('limit') !== '20')) && (
+        {hasActiveFilters && (
           <button type="button" onClick={handleReset} className="btn btn-secondary">
             Скинути
           </button>

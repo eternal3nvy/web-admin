@@ -72,6 +72,13 @@
   transform: translateY(-1px);
 }
 
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
 @media (max-width: 768px) {
   .filter-form {
     flex-direction: column;
@@ -83,7 +90,16 @@
     min-width: unset;
   }
 
-  .btn {
+  .filter-form > .btn {
+    width: 100%;
+  }
+
+  .filter-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-actions .btn {
     width: 100%;
   }
 }

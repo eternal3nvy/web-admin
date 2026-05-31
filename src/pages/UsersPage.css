@@ -1,10 +1,22 @@
 @import './LotsPage.css';
 
+.users-page {
+  max-width: 100%;
+}
+
+.users-page h1 {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 28px;
+}
+
 .users-page-tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
   border-bottom: 2px solid #eee;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .users-tab {
@@ -18,6 +30,8 @@
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .users-tab:hover {
@@ -27,6 +41,51 @@
 .users-tab.active {
   color: #6366f1;
   border-bottom-color: #6366f1;
+}
+
+.users-banner-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.users-banner-dismiss {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.users-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.users-empty {
+  padding: 24px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.users-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 4px;
+  border-radius: 8px;
+}
+
+.users-table-wrapper .lots-table {
+  margin-top: 0;
+  min-width: 860px;
 }
 
 .lots-table .actions-cell {
@@ -50,24 +109,6 @@
   background-color: #2980b9;
 }
 
-.btn-ban {
-  background-color: #f39c12;
-  color: white;
-}
-
-.btn-ban:hover:not(:disabled) {
-  background-color: #d68910;
-}
-
-.btn-unban {
-  background-color: #16a085;
-  color: white;
-}
-
-.btn-unban:hover:not(:disabled) {
-  background-color: #138d75;
-}
-
 .btn-delete {
   background-color: #e74c3c;
   color: white;
@@ -75,6 +116,55 @@
 
 .btn-delete:hover:not(:disabled) {
   background-color: #c0392b;
+}
+
+.pagination-bar {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagination-pages {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-btn-page {
+  padding: 4px 6px;
+  min-width: 28px;
+  font-weight: normal;
+}
+
+.pagination-btn-page.active {
+  background-color: #8884d8;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination-info {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
 }
 
 .modal-overlay {
@@ -121,6 +211,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .modal-content input:disabled {
@@ -154,19 +245,6 @@
 .alert-inline.error {
   background: #fdecea;
   color: #c0392b;
-}
-
-.alert-inline.success {
-  background: #d4edda;
-  color: #155724;
-}
-
-.modal-content .form-select-status {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
 }
 
 .table-inline-select {
@@ -218,4 +296,49 @@
 .table-inline-select.role-mod {
   border-color: #3498db;
   color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .users-page h1 {
+    font-size: 24px;
+  }
+
+  .users-table-wrapper .lots-table thead tr th,
+  .users-table-wrapper .lots-table tbody tr td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .table-inline-select {
+    min-width: 120px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+
+  .pagination-info {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .users-tab {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .lots-table .actions-cell {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lots-table .actions-cell .btn {
+    width: 100%;
+  }
 }

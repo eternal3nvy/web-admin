@@ -18,6 +18,10 @@
   padding-bottom: 20px;
 }
 
+.sidebar-brand-logo {
+  flex-shrink: 0;
+}
+
 .sidebar-brand h5 {
   color: white;
   font-weight: 600;

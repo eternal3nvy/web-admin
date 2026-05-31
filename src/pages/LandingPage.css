@@ -1,0 +1,217 @@
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f8f9;
+  color: #222;
+}
+
+.landing-header {
+  background: #2c2429;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(44, 36, 41, 0.15);
+}
+
+.landing-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.landing-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f6f8f9;
+}
+
+.landing-admin-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #408196;
+  background-color: transparent;
+  border: 1px solid #408196;
+  border-radius: 6px;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.landing-admin-btn:hover {
+  color: #fff;
+  background-color: #408196;
+  border-color: #408196;
+}
+
+.landing-main {
+  flex: 1;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+.landing-hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.landing-hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #2c2429;
+}
+
+.landing-lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #555;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.landing-about,
+.landing-download {
+  background: #f6f8f9;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid #e0e4e6;
+  box-shadow: 0 2px 10px rgba(44, 36, 41, 0.06);
+  margin-bottom: 24px;
+}
+
+.landing-about h2,
+.landing-download h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #2c2429;
+}
+
+.landing-about p,
+.landing-download p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #2c2429;
+  margin: 0 0 12px;
+}
+
+.landing-about p:last-child,
+.landing-download p:last-child {
+  margin-bottom: 0;
+}
+
+.landing-download-actions {
+  margin-top: 20px;
+}
+
+.landing-download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  border: 1px solid #408196;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #408196;
+  color: #f6f8f9;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.landing-download-btn i {
+  color: #f6f8f9;
+}
+
+.landing-download-btn:not(.landing-download-btn--downloaded):hover,
+.landing-download-btn:not(.landing-download-btn--downloaded):focus {
+  background-color: #d1e8ea;
+  border-color: #d1e8ea;
+  color: #2c2429;
+}
+
+.landing-download-btn:not(.landing-download-btn--downloaded):hover i,
+.landing-download-btn:not(.landing-download-btn--downloaded):focus i {
+  color: #2c2429;
+}
+
+.landing-download-btn--downloaded,
+.landing-download-btn--downloaded:hover,
+.landing-download-btn--downloaded:focus {
+  background-color: #d1e8ea;
+  border-color: #d1e8ea;
+  color: #2c2429;
+  cursor: default;
+}
+
+.landing-download-btn--downloaded i {
+  color: #2c2429;
+}
+
+.landing-download-btn:disabled {
+  opacity: 1;
+}
+
+.landing-footer {
+  text-align: center;
+  padding: 20px 24px;
+  border-top: 1px solid #e0e4e6;
+  background: #f6f8f9;
+}
+
+.landing-footer p {
+  margin: 0;
+  font-size: 13px;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .landing-main {
+    padding: 32px 16px 48px;
+  }
+
+  .landing-hero h1 {
+    font-size: 28px;
+  }
+
+  .landing-lead {
+    font-size: 16px;
+  }
+
+  .landing-about,
+  .landing-download {
+    padding: 24px 20px;
+  }
+
+  .landing-header-inner {
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-header-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .landing-admin-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .landing-download-btn {
+    width: 100%;
+  }
+}

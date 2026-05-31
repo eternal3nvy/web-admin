@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './auth/ProtectedRoute'
+import LoginRoute from './auth/LoginRoute'
 import MainLayout from './layouts/MainLayout'
+import LandingPage from './pages/LandingPage'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Users from './pages/Users'
@@ -13,9 +15,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage/>} />
+        <Route path="/" element={<LandingPage />} />
 
-        <Route path="/" element={
+        <Route path="/login" element={
+          <LoginRoute>
+            <LoginPage />
+          </LoginRoute>
+        } />
+
+        <Route path="/dashboard" element={
           <ProtectedRoute>
             <MainLayout>
               <IndexPage />

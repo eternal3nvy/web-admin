@@ -75,8 +75,8 @@ const UsersGrowthChart = () => {
             style={{
               padding: "6px 12px",
               cursor: loading ? "not-allowed" : "pointer",
-              background: loading ? "#ccc" : "#8884d8",
-              color: "#fff",
+              background: loading ? "#ccc" : "#408196",
+              color: "#f6f8f9",
               border: "none",
               borderRadius: "4px"
             }}
@@ -100,7 +100,7 @@ const UsersGrowthChart = () => {
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="users" name="New Users" stroke="#8884d8" activeDot={{ r: 8 }} />
+              <Line type="monotone" dataKey="users" name="New Users" stroke="#408196" activeDot={{ r: 8 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>

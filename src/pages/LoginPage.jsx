@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { loginWithCredentials } from "../services/authService";
 import { checkEmail } from "../utils/validators";
-import BrandInfinityIcon from "../components/BrandInfinityIcon";
+import BrandLogo from "../components/BrandLogo";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -12,14 +12,8 @@ const LoginPage = () => {
   const [feedback, setFeedback] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login, isAuthenticated, isInitializing } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!isInitializing && isAuthenticated) {
-      navigate("/");
-    }
-  }, [isInitializing, isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +33,7 @@ const LoginPage = () => {
       setIsLoading(true);
       const data = await loginWithCredentials(email, password);
       login(data.token);
-      navigate("/");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       setFeedback(
         err.response?.data?.error || "Не вдалося увійти. Спробуйте ще раз"
@@ -49,15 +43,11 @@ const LoginPage = () => {
     }
   };
 
-  if (isInitializing) {
-    return null;
-  }
-
   return (
     <div className="login-page">
       <div className="login-card">
         <div className="login-brand">
-          <BrandInfinityIcon size={40} className="login-brand-icon mx-auto" />
+          <BrandLogo size={40} className="login-brand-icon mx-auto" />
           <h1>Antiques Auction</h1>
           <p>Admin dashboard</p>
         </div>

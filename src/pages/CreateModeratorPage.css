@@ -23,15 +23,17 @@
 }
 
 .moderator-form-card .btn-submit {
-  background-color: #6366f1;
-  border-color: #6366f1;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-text-on-accent);
   padding: 10px 24px;
   font-weight: 500;
 }
 
 .moderator-form-card .btn-submit:hover {
-  background-color: #4f46e5;
-  border-color: #4f46e5;
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-text-on-accent);
 }
 
 .moderator-form-card .btn-submit:disabled {

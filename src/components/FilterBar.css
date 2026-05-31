@@ -37,8 +37,8 @@
 .filter-group input:focus,
 .filter-group select:focus {
   outline: none;
-  border-color: #8884d8;
-  box-shadow: 0 0 0 2px rgba(136, 132, 216, 0.1);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-ring);
 }
 
 .btn {
@@ -52,14 +52,14 @@
 }
 
 .btn-primary {
-  background-color: #8884d8;
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-text-on-accent);
 }
 
 .btn-primary:hover {
-  background-color: #6f6fb8;
+  background-color: var(--color-accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(136, 132, 216, 0.3);
+  box-shadow: 0 2px 4px var(--color-accent-shadow);
 }
 
 .btn-secondary {

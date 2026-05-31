@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import BrandLogo from '../components/BrandLogo';
 import './LandingPage.css';
 
-// TODO: замінити на реальне посилання після публікації додатка
-// App Store: https://apps.apple.com/app/...
-// Google Play: https://play.google.com/store/apps/details?id=...
-const APP_DOWNLOAD_URL = null;
+const APP_DOWNLOAD_URL =
+  'https://expo.dev/accounts/vadrille12/projects/antiques-auction/builds/6570abdf-5bca-4988-a954-da25550ff2f7';
 
 const LandingPage = () => {
   const [isDownloaded, setIsDownloaded] = useState(false);

@@ -3,6 +3,8 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from 'recharts';
 
+import { getLotGrowthChartData } from '../../services/statService';
+
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload; 
@@ -34,8 +36,7 @@ const LotGrowthChart = ({ lotId }) => {
   useEffect(() => {
     const fetchChartData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/web/lots/${lotId}/growth-chart`);
-        const result = await response.json();
+        const result = await getLotGrowthChartData(lotId);
         
         const chartData = result.map((item, index) => ({
           ...item,

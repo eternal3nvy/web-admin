@@ -15,6 +15,9 @@ function LotPage() {
   const [actionSuccess, setActionSuccess] = useState(null);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectionReason, setRejectionReason] = useState('');
+  
+  // Добавлен стейт для отслеживания выбранной картинки
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const statusColors = {
     'draft': '#95a5a6',
@@ -41,6 +44,12 @@ function LotPage() {
     return statusColors[status] || '#95a5a6';
   };
 
+  const getImageUrl = (image) => {
+    if (!image) return null;
+    if (typeof image === 'string') return image;
+    return image.photo_url || image.url || image.image_url; 
+  };
+
   useEffect(() => {
     const fetchLot = async () => {
       setLoading(true);
@@ -48,6 +57,7 @@ function LotPage() {
       try {
         const data = await getLotById(id);
         setLot(Array.isArray(data) ? data[0] : data.data ? data.data[0] : data);
+        setActiveImageIndex(0); // Сбрасываем индекс при загрузке нового лота
       } catch (err) {
         console.error('Failed to fetch lot:', err);
         setError('Failed to load lot details');
@@ -130,7 +140,8 @@ function LotPage() {
         <button className="btn-back" onClick={() => navigate('/lots')}>← Back to Lots</button>
         <h1>{lot.title}</h1>
       </div>
-            {lot.lot_status === 'in-moderation' && (
+      
+      {lot.lot_status === 'in-moderation' && (
         <div className="moderation-actions">
           <h2>Moderation Actions</h2>
           <div className="action-buttons">
@@ -157,12 +168,44 @@ function LotPage() {
 
       <div className="lot-container">
         <div className="lot-images">
-          {lot.main_image ? (
-            <img src={lot.main_image} alt={lot.title} className="lot-main-image" />
+          {lot.images && lot.images.length > 0 ? (
+            <>
+              {/* Главное изображение зависит от выбранного activeImageIndex */}
+              <img 
+                src={getImageUrl(lot.images[activeImageIndex])} 
+                alt={lot.title} 
+                className="lot-main-image" 
+              />
+              
+              {/* Показываем галерею миниатюр, если картинок больше 1 */}
+              {lot.images.length > 1 && (
+                <div className="lot-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '10px', flexWrap: 'wrap' }}>
+                  {lot.images.map((img, index) => (
+                    <img 
+                      key={index} 
+                      src={getImageUrl(img)} 
+                      alt={`${lot.title} thumbnail ${index + 1}`} 
+                      className={`lot-thumbnail-image ${index === activeImageIndex ? 'active' : ''}`} 
+                      style={{ 
+                        width: '80px', 
+                        height: '80px', 
+                        objectFit: 'cover', 
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        border: index === activeImageIndex ? '2px solid #27ae60' : '1px solid #ddd',
+                        opacity: index === activeImageIndex ? 1 : 0.6,
+                        transition: 'all 0.2s ease-in-out'
+                      }}
+                      onClick={() => setActiveImageIndex(index)} // Смена главной картинки по клику
+                    />
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <div className="no-image">No image available</div>
           )}
-        <LotGrowthChart lotId={lot.lot_id} />
+          <LotGrowthChart lotId={lot.lot_id} />
         </div>
         
         <div className="lot-details">
@@ -193,12 +236,12 @@ function LotPage() {
 
           <div className="detail-row">
             <span className="label">Starting Price:</span>
-            <span className="value price">${Number(lot.starting_price || 0).toFixed(2)}</span>
+            <span className="value price">{Number(lot.starting_price || 0).toFixed(2)} ₴</span>
           </div>
 
           <div className="detail-row">
             <span className="label">Bid Step:</span>
-            <span className="value">${Number(lot.bid_step || 0).toFixed(2)}</span>
+            <span className="value">{Number(lot.bid_step || 0).toFixed(2)} ₴</span>
           </div>
 
           <div className="detail-row">

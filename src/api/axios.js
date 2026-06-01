@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:5000/api/web"; // todo set via env
+const BASE_URL = "https://antiques-api.onrender.com/api/web"; // todo set via env
 
 
 const api = axios.create({

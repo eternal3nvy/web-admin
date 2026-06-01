@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage'
 import IndexPage from './pages/IndexPage'
 import LoginPage from './pages/LoginPage'
 import Users from './pages/Users'
-import LotsPage from './pages/lotsPage'
+import LotsPage from './pages/LotsPage'
 import CreateModeratorPage from './pages/CreateModeratorPage'
 import LotPage from './pages/lotPage'
 

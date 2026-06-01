@@ -33,3 +33,8 @@ export const getLotsByPeriod = async (startDate, endDate) => {
 
     return res.data;
 }
+
+export const getLotGrowthChartData = async (lotId) => {
+    const res = await api.get(`/lots/${lotId}/growth-chart`);
+    return res.data;
+}

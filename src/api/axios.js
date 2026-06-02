@@ -1,6 +1,8 @@
 import axios from "axios";
 const BASE_URL = "https://antiques-api.onrender.com/api/web"; // todo set via env
 
+// for download counter testing on localhost
+// const BASE_URL = "http://localhost:5000/api/web";
 
 const api = axios.create({
     baseURL: BASE_URL || "http://localhost:5000/api",

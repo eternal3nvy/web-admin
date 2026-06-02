@@ -177,6 +177,11 @@
   color: #888;
 }
 
+.download-сount-wrapper {
+  margin: 10px 0;
+  font-size: 13pt !important;
+}
+
 @media (max-width: 768px) {
   .landing-main {
     padding: 32px 16px 48px;

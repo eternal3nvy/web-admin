@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import api from '../api/axios';
 import BrandLogo from '../components/BrandLogo';
 import './LandingPage.css';
 
@@ -8,8 +10,22 @@ const APP_DOWNLOAD_URL =
 
 const LandingPage = () => {
   const [isDownloaded, setIsDownloaded] = useState(false);
+  const [downloadCount, setDownloadCount] = useState(0);
 
-  const handleDownloadClick = () => {
+  useEffect(() => {
+    const fetchCount = async () => {
+      try {
+        const response = await api.get('/stat/downloads-count');
+        setDownloadCount(response.data.count);
+      } catch (error) {
+        console.error('Не вдалося завантажити лічильник:', error);
+      }
+    };
+
+    fetchCount();
+  }, []);
+
+  const handleDownloadClick = async () => {
     if (isDownloaded) return;
 
     if (APP_DOWNLOAD_URL) {
@@ -17,6 +33,13 @@ const LandingPage = () => {
     }
 
     setIsDownloaded(true);
+
+    try {
+      const response = await api.post('/stat/downloads-increment');
+      setDownloadCount(response.data.count);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -58,11 +81,19 @@ const LandingPage = () => {
 
         <section className="landing-download">
           <h2>Мобільний додаток</h2>
+          <h2 className="landing-counter-wrapper">
+            <span>Кількість завантажень: </span>
+            <span>{downloadCount}</span>
+          </h2>
+
           <p>
             Завантажте офіційний додаток antiques-mobile, щоб брати участь в
             аукціонах, додавати лоти в обране та отримувати сповіщення про
             ставки.
           </p>
+
+          
+
           <div className="landing-download-actions">
             <button
               type="button"

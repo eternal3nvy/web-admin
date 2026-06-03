@@ -51,6 +51,12 @@
   border-color: #408196;
 }
 
+.landing-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .landing-main {
   flex: 1;
   max-width: 960px;
@@ -175,6 +181,33 @@
   margin: 0;
   font-size: 13px;
   color: #888;
+}
+
+.landing-language-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.landing-language-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1px solid #408196;
+  border-radius: 6px;
+  color: #408196;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.landing-language-btn:hover {
+  background-color: #408196;
+  color: #f6f8f9;
+  border-color: #408196;
+}
+
+.landing-language-btn:active {
+  opacity: 0.85;
 }
 
 .download-сount-wrapper {

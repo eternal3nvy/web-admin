@@ -1,0 +1,26 @@
+{
+  "header": {
+    "loginAdmin": "Log in to Admin Panel"
+  },
+  "hero": {
+    "lead": "A platform for online auctions of antiques and collectibles. Buy and sell unique lots in a convenient mobile app."
+  },
+  "about": {
+    "title": "About the platform",
+    "p1": "Antiques Auction connects collectors, sellers, and buyers in one place. Users can auction lots, place real-time bids, track delivery status, and manage their profiles.",
+    "p2": "Moderators and administrators work via a web panel: verifying lots, managing users, and analyzing platform statistics."
+  },
+  "download": {
+    "title": "Mobile App",
+    "countLabel": "Downloads: ",
+    "desc": "Download the official antiques-mobile app to participate in auctions, favorite lots, and receive bid notifications.",
+    "btnSuccess": "App downloaded!",
+    "btnDefault": "Download App"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "errors": {
+    "fetchCount": "Failed to load counter:"
+  }
+}

@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import api from '../api/axios';
 import BrandLogo from '../components/BrandLogo';
+import { useTranslation } from 'react-i18next';
 import './LandingPage.css';
 
 const APP_DOWNLOAD_URL =
   'https://expo.dev/accounts/vadrille12/projects/antiques-auction/builds/6570abdf-5bca-4988-a954-da25550ff2f7';
 
 const LandingPage = () => {
+  const {t,i18n} = useTranslation();
+
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [downloadCount, setDownloadCount] = useState(0);
 
@@ -23,7 +26,7 @@ const LandingPage = () => {
     };
 
     fetchCount();
-  }, []);
+  }, [t]);
 
   const handleDownloadClick = async () => {
     if (isDownloaded) return;
@@ -42,6 +45,10 @@ const LandingPage = () => {
     }
   };
 
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  }
+
   return (
     <div className="landing-page">
       <header className="landing-header">
@@ -50,49 +57,41 @@ const LandingPage = () => {
             <BrandLogo size={36} />
             <span>Antiques Auction</span>
           </div>
-          <Link to="/login" className="landing-admin-btn">
-            Увійти на адмін-сторінку
-          </Link>
-        </div>
+          <div className="landing-actions">
+            <div className="landing-language-btns">
+              <button className="landing-language-btn" onClick={() => changeLanguage('uk')}>UK</button>
+              <button className="landing-language-btn" onClick={() => changeLanguage('en')}>EN</button>
+            </div>
+
+            <Link to="/login" className="landing-admin-btn">
+              {t('header.loginAdmin')}
+            </Link>
+          </div>
+        </div>    
       </header>
 
       <main className="landing-main">
         <section className="landing-hero">
           <h1>Antiques Auction</h1>
           <p className="landing-lead">
-            Платформа для онлайн-аукціонів антикваріату та колекційних речей.
-            Купуйте та продавайте унікальні лоти в зручному мобільному додатку.
+            {t('hero.lead')}
           </p>
         </section>
 
         <section className="landing-about">
-          <h2>Про платформу</h2>
-          <p>
-            Antiques Auction об&apos;єднує колекціонерів, продавців і покупців
-            на одному майданчику. Користувачі можуть виставляти лоти на
-            аукціон, робити ставки в реальному часі, відстежувати статус
-            доставки та керувати своїм профілем.
-          </p>
-          <p>
-            Модератори та адміністратори працюють через веб-панель: перевіряють
-            лоти, керують користувачами та аналізують статистику платформи.
-          </p>
+          <h2>{t('about.title')}</h2>
+          <p>{t('about.p1')}</p>
+          <p>{t('about.p2')}</p>
         </section>
 
         <section className="landing-download">
-          <h2>Мобільний додаток</h2>
+          <h2>{t('download.title')}</h2>
           <h2 className="landing-counter-wrapper">
-            <span>Кількість завантажень: </span>
+            <span>{t('download.countLabel')}</span>
             <span>{downloadCount}</span>
           </h2>
 
-          <p>
-            Завантажте офіційний додаток antiques-mobile, щоб брати участь в
-            аукціонах, додавати лоти в обране та отримувати сповіщення про
-            ставки.
-          </p>
-
-          
+          <p>{t('download.desc')}</p>
 
           <div className="landing-download-actions">
             <button
@@ -109,14 +108,14 @@ const LandingPage = () => {
                   isDownloaded ? 'bi-check-circle' : 'bi-download'
                 }`}
               />
-              {isDownloaded ? 'Додаток завантажено!' : 'Завантажити додаток'}
+              {isDownloaded ? t('download.btnSuccess') : t('download.btnDefault')}
             </button>
           </div>
         </section>
       </main>
 
       <footer className="landing-footer">
-        <p>&copy; {new Date().getFullYear()} Antiques Auction. Усі права захищено.</p>
+        <p>&copy; {new Date().getFullYear()} Antiques Auction. {t('footer.rights')}</p>
       </footer>
     </div>
   );

@@ -9,6 +9,7 @@ import Users from './pages/Users'
 import LotsPage from './pages/LotsPage'
 import CreateModeratorPage from './pages/CreateModeratorPage'
 import LotPage from './pages/lotPage'
+import './i18n'
 
 
 function App() {

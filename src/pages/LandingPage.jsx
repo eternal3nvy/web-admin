@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import './LandingPage.css';
 
 const APP_DOWNLOAD_URL =
-  'https://expo.dev/accounts/vadrille12/projects/antiques-auction/builds/e1ba735c-0668-4111-bd6d-717f60f83599"';
+  'https://expo.dev/accounts/vadrille12/projects/antiques-auction/builds/e1ba735c-0668-4111-bd6d-717f60f83599';
 
 const LandingPage = () => {
   const {t,i18n} = useTranslation();
